@@ -36,8 +36,36 @@ a concise, packet-level confirmation of the activity visible in the PCAPdroid
 screenshots without requiring inspection of the full evidence bundle.
 
 ---
+Prerequisite — Obtain the Forensic Review Bundle
 
-## Step 1 — Verify the BitTorrent Evidence Appendix
+The BitTorrent Evidence Appendix referenced below is contained within the
+forensics_review_minimal review bundle distributed via this repository’s
+Releases section.
+
+Before proceeding, reviewers must:
+
+1. Download all files matching:
+```
+forensics_review_minimal_*.tar.gz.part_*
+```
+and the corresponding .parts.sha256 file.
+
+2. Verify the downloaded parts:
+```
+sha256sum -c forensics_review_minimal_*.parts.sha256
+```
+4. Reassemble the archive using the provided script:
+```
+./REASSEMBLE_forensics_review_minimal_*.sh
+```
+4. Extract the resulting tar.gz archive.
+
+After extraction, the BitTorrent Evidence Appendix directory will be present
+and may be verified as described in Step 1.
+
+---
+
+## Step 1 — Verify the BitTorrent Evidence Appendix (Extracted)
 
 Download the following files from this repository’s **Releases** section:
 
