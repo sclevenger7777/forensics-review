@@ -1,4 +1,3 @@
-
 # forensics-review
 
 Private forensic review repository containing network-capture evidence and
@@ -16,9 +15,8 @@ The activity was captured during packet-level network monitoring using
 PCAPdroid while testing a custom-developed Android application.
 
 All findings presented here are derived exclusively from packet captures,
-cryptographic hashes, and reproducible extraction scripts. Reviewers are not
-required to rely on any assertions by the submitter; all material facts can be
-verified directly from the evidence provided in this repository.
+cryptographic hashes, and reproducible extraction scripts. All material facts
+can be verified directly from the evidence provided in this repository.
 
 ---
 
@@ -36,75 +34,66 @@ a concise, packet-level confirmation of the activity visible in the PCAPdroid
 screenshots without requiring inspection of the full evidence bundle.
 
 ---
-Prerequisite — Obtain the Forensic Review Bundle
 
-The BitTorrent Evidence Appendix referenced below is contained within the
-forensics_review_minimal review bundle distributed via this repository’s
-Releases section.
+## Prerequisite — Obtain the Forensic Review Bundle
 
-Before proceeding, reviewers must:
+The BitTorrent Evidence Appendix is contained within the
+`forensics_review_minimal` review bundle distributed via this repository’s
+**Releases** section.
+
+Before proceeding:
 
 1. Download all files matching:
-```
-forensics_review_minimal_*.tar.gz.part_*
-```
-and the corresponding .parts.sha256 file.
+
+forensics_review_minimal_.tar.gz.part_
+
+and the corresponding checksum file:
+
+forensics_review_minimal_*.tar.gz.sha256
 
 2. Verify the downloaded parts:
-```
-sha256sum -c forensics_review_minimal_*.parts.sha256
-```
-4. Reassemble the archive using the provided script:
-```
+
+```bash
+sha256sum -c forensics_review_minimal_*.tar.gz.sha256
+
+3. Reassemble the archive using the provided script:
+
+
+
 ./REASSEMBLE_forensics_review_minimal_*.sh
-```
+
 4. Extract the resulting tar.gz archive.
 
-After extraction, the BitTorrent Evidence Appendix directory will be present
-and may be verified as described in Step 1.
+
+
+After extraction, the BitTorrent Evidence Appendix will be present on the local filesystem and may be verified as described below.
+
 
 ---
 
-## Step 1 — Verify the BitTorrent Evidence Appendix (Extracted)
+Step 1 — Verify the BitTorrent Evidence Appendix
 
-Download the following files from this repository’s **Releases** section:
+Verify the appendix archive integrity:
 
--
-```
-happymod_bt_evidence_appendix_20250917.tar.gz`
-```
--
-```
-happymod_bt_evidence_appendix_20250917.tar.gz.sha256`
-```
-Verify the archive integrity:
-
-```bash
 sha256sum -c happymod_bt_evidence_appendix_20250917.tar.gz.sha256
-```
+
 The command must report OK.
+
 
 ---
 
 Step 2 — Extract the Appendix
 
-After successful verification, extract the archive:
+Extract the appendix archive:
 
-```bash
 tar -xzf happymod_bt_evidence_appendix_20250917.tar.gz
-```
 
-This will create the following items:
+This will create:
 
-```
 happymod_bt_window_20250917_035447/
-```
-```
 happymod_contextual_screenshots_20250917/
-```
-```
 happymod_contextual_appendix_20250917.txt
-```
+
 
 ---
 
@@ -112,37 +101,29 @@ Step 3 — Verify Derived BitTorrent Artifacts
 
 Change into the BitTorrent window directory:
 
-```bash
 cd happymod_bt_window_20250917_035447
-```
-Verify internal hashes for all derived artifacts:
 
-```baah
+Verify internal hashes:
+
 sha256sum -c SHA256SUMS_bt_window_20250917.txt
-```
 
-All entries must report OK. This confirms that the derived files match their recorded cryptographic hashes.
+All entries must report OK.
 
 Verified artifacts include:
 
-```
 bt_window_all.txt
-```
-```
+
 bt_window_ports.txt
-```
-```
+
 bt_window.pcapng
-```
-```
+
 bt_window_ports_summary_20250917.csv
-```
-```
+
 README_bt_window_20250917.txt
-```
-```
+
 create_bt_window_summary_20250917.sh
-```
+
+
 
 ---
 
@@ -150,37 +131,23 @@ Step 4 — Review Packet-Level BitTorrent Activity
 
 Primary review targets:
 
-```
 bt_window_ports_summary_20250917.csv
-```
 Aggregated view of BitTorrent-typical UDP activity by peer address, port, and traffic direction within the defined time window.
 
-```
 bt_window_ports.txt
-```
-
 Line-by-line packet listing showing timestamps, source and destination IPs, ports, and frame lengths.
 
-```
 bt_window.pcapng
-```
-
 Raw packet capture for the same time window, suitable for independent analysis using Wireshark or tshark.
 
 Example inspection commands:
 
-```bash
 head bt_window_ports_summary_20250917.csv
 head bt_window_ports.txt
-```
 
-Timestamps in these files correspond directly to the PCAPdroid screenshots located in:
+Timestamps correspond directly to the PCAPdroid screenshots located in:
 
-```bash
 ../happymod_contextual_screenshots_20250917/
-```
-
-This allows direct correlation between user-interface observations and underlying packet data.
 
 
 ---
@@ -193,15 +160,12 @@ The full bundle includes:
 
 Original PCAPdroid and related packet captures
 
-```
 inner_manifest.sha256
-```
-Verification logs e.g. 
-```
-verify_inner_20251231T080138Z.log
-```
+
+Verification logs (e.g. verify_inner_20251231T080138Z.log)
 
 Tree-based hash validation files
+
 
 Using these materials, a reviewer can independently:
 
@@ -212,6 +176,8 @@ Locate the original staged capture used for derivation
 Re-run the extraction commands
 
 Reproduce the BitTorrent window and summaries exactly
+
+
 
 ---
 
@@ -227,6 +193,8 @@ Contextual or regulatory materials do not alter evidentiary weight.
 
 All conclusions are derived directly from packet captures and cryptographic verification artifacts.
 
+
+
 ---
 
 Intended Audience
@@ -240,6 +208,39 @@ Security researchers
 Platform trust and safety teams
 
 Compliance and regulatory reviewers
+
+
+
+---
+
+Reproducibility Statement
+
+Any qualified reviewer with access to this repository can:
+
+Verify all cryptographic hashes
+
+Recreate the BitTorrent activity window from the original capture
+
+Regenerate all derived summaries
+
+Independently confirm correspondence between UI screenshots and packet data
+
+
+The purpose of this repository is to enable that process end-to-end.
+
+
+---
+
+License
+
+Original analysis scripts are MIT licensed. Evidence files consist of raw packet data and cryptographic hashes representing factual observations.
+
+
+---
+
+Contributing
+
+This repository is maintained as a read-only forensic record. Issues are welcome for clarification or reproducibility questions. No direct modifications to evidence or scripts are accepted.
 
 ---
 
@@ -262,7 +263,7 @@ The purpose of this repository is to enable that process end-to-end.
 
 License
 
-Original analysis scripts are MIT licensed. Evidence files consist of raw packet data and cryptographic hashes representing factual observations.
+Original analysis scripts are MIT licensed. Evidence files hashesawofacket data and cryptographic hashes representing factual observations.
 
 ---
 
