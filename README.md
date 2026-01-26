@@ -41,16 +41,20 @@ screenshots without requiring inspection of the full evidence bundle.
 
 Download the following files from this repository’s **Releases** section:
 
-- `happymod_bt_evidence_appendix_20250917.tar.gz`
-- `happymod_bt_evidence_appendix_20250917.tar.gz.sha256`
-
+-
+```
+happymod_bt_evidence_appendix_20250917.tar.gz`
+```
+-
+```
+happymod_bt_evidence_appendix_20250917.tar.gz.sha256`
+```
 Verify the archive integrity:
 
 ```bash
 sha256sum -c happymod_bt_evidence_appendix_20250917.tar.gz.sha256
 ```
 The command must report OK.
-
 
 ---
 
@@ -64,13 +68,15 @@ tar -xzf happymod_bt_evidence_appendix_20250917.tar.gz
 
 This will create the following items:
 
+```
 happymod_bt_window_20250917_035447/
-
+```
+```
 happymod_contextual_screenshots_20250917/
-
+```
+```
 happymod_contextual_appendix_20250917.txt
-
-
+```
 
 ---
 
@@ -87,23 +93,28 @@ Verify internal hashes for all derived artifacts:
 sha256sum -c SHA256SUMS_bt_window_20250917.txt
 ```
 
-All entries must report OK. This confirms that the derived files have not been modified since they were created.
+All entries must report OK. This confirms that the derived files match their recorded cryptographic hashes.
 
 Verified artifacts include:
 
+```
 bt_window_all.txt
-
+```
+```
 bt_window_ports.txt
-
+```
+```
 bt_window.pcapng
-
+```
+```
 bt_window_ports_summary_20250917.csv
-
+```
+```
 README_bt_window_20250917.txt
-
+```
+```
 create_bt_window_summary_20250917.sh
-
-
+```
 
 ---
 
@@ -111,23 +122,32 @@ Step 4 — Review Packet-Level BitTorrent Activity
 
 Primary review targets:
 
+```
 bt_window_ports_summary_20250917.csv
+```
 Aggregated view of BitTorrent-typical UDP activity by peer address, port, and traffic direction within the defined time window.
 
+```
 bt_window_ports.txt
+```
+
 Line-by-line packet listing showing timestamps, source and destination IPs, ports, and frame lengths.
 
+```
 bt_window.pcapng
+```
+
 Raw packet capture for the same time window, suitable for independent analysis using Wireshark or tshark.
 
-
 Example inspection commands:
+
 ```bash
 head bt_window_ports_summary_20250917.csv
 head bt_window_ports.txt
 ```
 
 Timestamps in these files correspond directly to the PCAPdroid screenshots located in:
+
 ```bash
 ../happymod_contextual_screenshots_20250917/
 ```
@@ -145,12 +165,15 @@ The full bundle includes:
 
 Original PCAPdroid and related packet captures
 
+```
 inner_manifest.sha256
-
-Verification logs (e.g. verify_inner_20251231T080138Z.log)
+```
+Verification logs e.g. 
+```
+verify_inner_20251231T080138Z.log
+```
 
 Tree-based hash validation files
-
 
 Using these materials, a reviewer can independently:
 
@@ -161,8 +184,6 @@ Locate the original staged capture used for derivation
 Re-run the extraction commands
 
 Reproduce the BitTorrent window and summaries exactly
-
-
 
 ---
 
@@ -176,9 +197,7 @@ Manifest and hash files provide integrity guarantees only; they do not assert in
 
 Contextual or regulatory materials do not alter evidentiary weight.
 
-No findings in this repository depend on trust in the original submitter.
-
-
+All conclusions are derived directly from packet captures and cryptographic verification artifacts.
 
 ---
 
@@ -193,8 +212,6 @@ Security researchers
 Platform trust and safety teams
 
 Compliance and regulatory reviewers
-
-
 
 ---
 
@@ -213,13 +230,11 @@ Independently confirm correspondence between UI screenshots and packet data
 
 The purpose of this repository is to enable that process end-to-end.
 
-
 ---
 
 License
 
 Original analysis scripts are MIT licensed. Evidence files consist of raw packet data and cryptographic hashes representing factual observations.
-
 
 ---
 
