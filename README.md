@@ -48,7 +48,7 @@ Verify the archive integrity:
 
 ```bash
 sha256sum -c happymod_bt_evidence_appendix_20250917.tar.gz.sha256
-
+```
 The command must report OK.
 
 
@@ -58,7 +58,9 @@ Step 2 — Extract the Appendix
 
 After successful verification, extract the archive:
 
+```bash
 tar -xzf happymod_bt_evidence_appendix_20250917.tar.gz
+```
 
 This will create the following items:
 
@@ -76,11 +78,14 @@ Step 3 — Verify Derived BitTorrent Artifacts
 
 Change into the BitTorrent window directory:
 
+```bash
 cd happymod_bt_window_20250917_035447
-
+```
 Verify internal hashes for all derived artifacts:
 
+```baah
 sha256sum -c SHA256SUMS_bt_window_20250917.txt
+```
 
 All entries must report OK. This confirms that the derived files have not been modified since they were created.
 
@@ -117,13 +122,15 @@ Raw packet capture for the same time window, suitable for independent analysis u
 
 
 Example inspection commands:
-
+```bash
 head bt_window_ports_summary_20250917.csv
 head bt_window_ports.txt
+```
 
 Timestamps in these files correspond directly to the PCAPdroid screenshots located in:
-
+```bash
 ../happymod_contextual_screenshots_20250917/
+```
 
 This allows direct correlation between user-interface observations and underlying packet data.
 
