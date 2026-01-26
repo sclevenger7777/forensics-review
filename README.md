@@ -241,32 +241,3 @@ Original analysis scripts are MIT licensed. Evidence files consist of raw packet
 Contributing
 
 This repository is maintained as a read-only forensic record. Issues are welcome for clarification or reproducibility questions. No direct modifications to evidence or scripts are accepted.
-
----
-
-Reproducibility Statement
-
-Any qualified reviewer with access to this repository can:
-
-Verify all cryptographic hashes
-
-Recreate the BitTorrent activity window from the original capture
-
-Regenerate all derived summaries
-
-Independently confirm correspondence between UI screenshots and packet data
-
-
-The purpose of this repository is to enable that process end-to-end.
-
----
-
-License
-
-Original analysis scripts are MIT licensed. Evidence files hashesawofacket data and cryptographic hashes representing factual observations.
-
----
-
-Contributing
-
-This repository is maintained as a read-only forensic record. Issues are welcome for clarification or reproducibility questions. No direct modifications to evidence or scripts are accepted.
