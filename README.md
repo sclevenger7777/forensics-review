@@ -200,16 +200,17 @@ This repository is intended for:
 - Platform trust and safety teams
 - Compliance and regulatory reviewers
 
----
-
 ## Reproducibility Statement
 
 Any qualified reviewer with access to this repository can:
 
-- Verify all cryptographic hashes
-- Recreate the BitTorrent activity window from the original capture
-- Regenerate all derived summaries
-- Independently confirm correspondence between UI screenshots and packet data
+- Verify all cryptographic hashes  
+- Recreate the BitTorrent activity window from the original capture  
+- Regenerate all derived summaries  
+- Independently confirm correspondence between UI screenshots and packet data  
+
+For non-interpretive, packet-level verification, see
+`OPTION_D_PACKET_LEVEL_VERIFICATION.md`.
 
 The purpose of this repository is to enable that process end-to-end.
 
