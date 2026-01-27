@@ -190,6 +190,16 @@ All conclusions are derived directly from packet captures and cryptographic
 verification artifacts.
 
 ---
+### External Derived Artifacts (Local)
+
+Additional PCAPdroid-derived CSV summaries may exist locally and are
+referenced via symlink for analyst convenience only.
+
+These files are **derived artifacts**, not primary evidence, and are not
+required to reproduce or validate packet-level findings.
+
+Primary evidence remains the immutable PCAP/PCAPNG files.
+---
 
 ## Intended Audience
 
