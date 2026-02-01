@@ -238,3 +238,21 @@ data and cryptographic hashes representing factual observations.
 This repository is maintained as a read-only forensic record. Issues are welcome
 for clarification or reproducibility questions. No direct modifications to
 evidence or scripts are accepted.
+
+## Derived BitTorrent Summary (HappyMod Window)
+
+The `evidence/derived/pcap_csv_archive` directory contains curated PCAPdroid
+CSV exports and a machine-generated BitTorrent summary:
+
+- `evidence/derived/pcap_csv_archive/bittorrent_summary.csv`
+
+  - Description: aggregation of rows where `protocol == "BitTorrent"` across
+    the curated PCAPdroid CSVs for the HappyMod observation window.
+  - SHA-256:
+
+    ```
+    8abacfdeea556947c00b27c632d88f5385922d39ea57b2d245de431ccabe6851
+    ```
+
+See `evidence/derived/pcap_csv_archive/README.md` for generation steps and
+scope limitations.
