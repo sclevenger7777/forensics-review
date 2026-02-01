@@ -88,3 +88,19 @@ screenshots, or descriptive text is required to reproduce the results.
 
 This appendix exists to provide a stable, citation-safe reference point for
 packet-level verification only.
+
+## Derived BitTorrent CSV Summary
+
+For convenience in cross-checking BitTorrent-related flows across the
+PCAPdroid-derived CSVs, this repository includes a machine-generated summary:
+
+- File: `evidence/derived/pcap_csv_archive/bittorrent_summary.csv`
+- SHA-256:
+
+  ```
+  8abacfdeea556947c00b27c632d88f5385922d39ea57b2d245de431ccabe6851
+  ```
+
+This artifact is derived by applying a simple filter over the curated
+`pcap_csv_archive` CSVs where `protocol == "BitTorrent"`. It is provided
+only as a non-interpretive aggregation to simplify packet-level verification.
