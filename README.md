@@ -20,6 +20,14 @@ can be verified directly from the evidence provided in this repository.
 
 ---
 
+## About This Repository
+This repository was produced independently as part of a personal research and learning
+effort in network forensics and reproducible evidence handling. The author has a
+background in hands-on technical work and is transitioning toward security and
+privacy-focused analysis.
+
+---
+
 ## Recommended Review Order
 
 | Order | Component                    | Evidence Class        | Notes                          |
