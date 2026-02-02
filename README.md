@@ -20,6 +20,20 @@ can be verified directly from the evidence provided in this repository.
 
 ---
 
+## Tools and upstream projects
+
+Network captures and CSV exports used in this repository were collected with
+[PCAPdroid](https://github.com/emanuele-f/PCAPdroid), an open-source Android
+traffic capture and analysis tool by Emanuele Faranda, licensed under GNU 
+General Public License version 3 or later (GPL-3.0+).
+
+This repository does **not** redistribute PCAPdroid source code or binaries.
+It only archives PCAPdroid-generated capture artifacts (PCAP/PCAPNG and
+derived CSV exports) and scripts that operate on those artifacts for
+reproducible verification.
+
+---
+
 ## About This Repository
 This repository was produced independently as part of a personal research and learning
 effort in network forensics and reproducible evidence handling. The author has a
@@ -264,3 +278,15 @@ CSV exports and a machine-generated BitTorrent summary:
 
 See `evidence/derived/pcap_csv_archive/README.md` for generation steps and
 scope limitations.
+
+## Tools and upstream projects
+
+Network captures and CSV exports used in this repository were collected with
+[PCAPdroid](https://github.com/emanuele-f/PCAPdroid), an open-source Android
+traffic capture and analysis tool by Emanuele Faranda, licensed under
+GNU GPL version 3 or later.
+
+This repository does **not** redistribute PCAPdroid source code or binaries.
+It only archives PCAPdroid-generated capture artifacts (PCAP/PCAPNG and
+derived CSV exports) and scripts that operate on those artifacts for
+reproducible verification.
