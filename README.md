@@ -23,7 +23,7 @@ can be verified directly from the evidence provided in this repository.
 ## Tools and upstream projects
 
 Network captures and CSV exports used in this repository were collected with
-[PCAPdroid](https://github.com/emanuele-f/PCAPdroid), an open-source Android
+[PCAPdroid](https://github.com/emanuele-f/PCAPdroid) `https://github.com/emanuele-f/PCAPdroid`, an open-source Android
 traffic capture and analysis tool by Emanuele Faranda, licensed under GNU 
 General Public License version 3 or later (GPL-3.0+).
 
