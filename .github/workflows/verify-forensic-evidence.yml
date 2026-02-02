@@ -1,0 +1,129 @@
+name: Verify forensic evidence
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  push:
+    tags:
+      - "evidence-freeze-*"
+
+jobs:
+  verify-evidence:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Show environment
+        run: |
+          uname -a
+          pwd
+          ls -R
+
+      - name: Ensure scripts are executable
+        run: |
+          chmod +x \
+            ./install_bittorrent_docs.sh \
+            ./build_bittorrent_summary.sh \
+            ./install_happymod_apk_docs.sh \
+            ./install_happymod_apk_static_metadata.sh \
+            ./rebuild_happymod_apk_static_metadata.sh
+
+      # --- BitTorrent appendix integrity (in-tree expectation) ---
+
+      - name: Verify BitTorrent appendix archive hash
+        working-directory: .
+        run: |
+          if [ ! -f "happymod_bt_evidence_appendix_20250917.tar.gz" ] || \
+             [ ! -f "happymod_bt_evidence_appendix_20250917.tar.gz.sha256" ]; then
+            echo "BitTorrent appendix archives not present in repo; nothing to verify."
+            exit 0
+          fi
+
+          echo "::group::sha256sum -c happymod_bt_evidence_appendix_20250917.tar.gz.sha256"
+          sha256sum -c happymod_bt_evidence_appendix_20250917.tar.gz.sha256
+          echo "::endgroup::"
+
+      - name: Extract BitTorrent appendix (if present)
+        if: success()
+        run: |
+          if [ -f "happymod_bt_evidence_appendix_20250917.tar.gz" ]; then
+            tar -xzf happymod_bt_evidence_appendix_20250917.tar.gz
+          else
+            echo "Appendix archive not present; skipping extraction."
+          fi
+
+      - name: Verify internal BitTorrent appendix hashes (if directory exists)
+        if: success()
+        run: |
+          if [ -d "happymod_bt_window_20250917_035447" ]; then
+            cd happymod_bt_window_20250917_035447
+            if [ -f "SHA256SUMS_bt_window_20250917.txt" ]; then
+              echo "::group::sha256sum -c SHA256SUMS_bt_window_20250917.txt"
+              sha256sum -c SHA256SUMS_bt_window_20250917.txt
+              echo "::endgroup::"
+            else
+              echo "Internal SHA256SUMS file missing; failing."
+              exit 1
+            fi
+          else
+            echo "BitTorrent window directory not found; skipping internal hash verification."
+          fi
+
+      # --- Derived BitTorrent summary (repo scripts) ---
+
+      - name: Run BitTorrent summary build script (if present)
+        run: |
+          if [ -x "./build_bittorrent_summary.sh" ]; then
+            echo "::group::./build_bittorrent_summary.sh"
+            ./build_bittorrent_summary.sh
+            echo "::endgroup::"
+          else
+            echo "build_bittorrent_summary.sh not found or not executable; skipping."
+          fi
+
+      # --- HappyMod APK static metadata integrity ---
+
+      - name: Verify HappyMod APK static metadata hash
+        working-directory: .
+        run: |
+          METADATA="evidence/derived/apk_static/happymod_apk_static_metadata.jsonl"
+          EXPECTED="57ecdffedc863741b91d8ad0925397f14960029401a9524c01b597fefd242805"
+
+          if [ ! -f "$METADATA" ]; then
+            echo "Static metadata file $METADATA not found; failing."
+            exit 1
+          fi
+
+          echo "::group::sha256sum $METADATA"
+          ACTUAL="$(sha256sum "$METADATA" | awk '{print $1}')"
+          echo "Actual:   $ACTUAL"
+          echo "Expected: $EXPECTED"
+          if [ "$ACTUAL" != "$EXPECTED" ]; then
+            echo "Metadata SHA-256 mismatch."
+            exit 1
+          fi
+          echo "::endgroup::"
+
+      - name: Rebuild HappyMod APK static metadata (idempotence check)
+        run: |
+          echo "::group::./rebuild_happymod_apk_static_metadata.sh"
+          ./rebuild_happymod_apk_static_metadata.sh
+          echo "::endgroup::"
+
+          METADATA="evidence/derived/apk_static/happymod_apk_static_metadata.jsonl"
+          EXPECTED="57ecdffedc863741b91d8ad0925397f14960029401a9524c01b597fefd242805"
+
+          ACTUAL="$(sha256sum "$METADATA" | awk '{print $1}')"
+          echo "Post-rebuild actual:   $ACTUAL"
+          echo "Post-rebuild expected: $EXPECTED"
+          if [ "$ACTUAL" != "$EXPECTED" ]; then
+            echo "Post-rebuild metadata SHA-256 mismatch; derivation is not stable."
+            exit 1
+          fi
+
+      - name: Final status
+        run: echo "Forensic evidence verification completed successfully."
