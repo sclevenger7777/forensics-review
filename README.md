@@ -1,5 +1,5 @@
 # forensics-review
-![Reproducible Evidence](https://img.shields.io/badge/evidence-reproducible%20%26%20verified-brightgreen)
+[![Reproducible Evidence](https://img.shields.io/badge/evidence-reproducible%20%26%20verified-brightgreen)](https://github.com/sclevenger7777/forensics-review/tree/forensics-review-v1)
 Private forensic review repository containing network-capture evidence and
 verification artifacts related to observed BitTorrent traffic associated with
 the HappyMod application environment.
