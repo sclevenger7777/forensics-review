@@ -57,6 +57,17 @@ screenshots without requiring inspection of the full evidence bundle.
 
 ---
 
+### Local one-shot verification
+
+If you have the evidence archives and APKs available locally, you can re-run
+the core integrity and reproducibility checks with:
+
+```bash
+cd forensics-review
+./scripts/run_local_verification.sh
+```
+---
+
 ## Prerequisite — Download Review Artifacts
 
 From this repository’s **Releases** section, download the following files.
