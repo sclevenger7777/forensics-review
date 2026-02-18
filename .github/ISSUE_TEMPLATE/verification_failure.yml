@@ -1,0 +1,43 @@
+name: Verification failure (hash/repro mismatch)
+description: Report a mismatch in hashes, scripts, or reproducibility steps
+title: "[VERIFY] "
+labels: ["verification"]
+body:
+  - type: input
+    id: artifacts
+    attributes:
+      label: Artifact filename(s)
+      placeholder: bt_window.pcapng, SHA256SUMS_*.txt, archive.zip
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected SHA-256 (from manifest/release)
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed SHA-256 (your output)
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce (commands)
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment (OS + tool versions)
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety
+      options:
+        - label: I did not include sensitive personal data or unpublished private captures.
+          required: true
