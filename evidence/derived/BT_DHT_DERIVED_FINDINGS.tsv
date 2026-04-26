@@ -1,0 +1,2 @@
+first_seen	last_seen	duration_seconds	local_ip	local_port	unique_remote_ips	unique_remote_ports	bt_dht_frame_count	get_peers_count	response_nodes_count	unique_info_hashes	pcap_sha256
+UNKNOWN	UNKNOWN	UNKNOWN	10.215.173.1	43883	UNKNOWN	UNKNOWN	207	UNKNOWN	UNKNOWN	UNKNOWN	bfad00f60f162b7990883ad28c8efbbac1e0d0776babc3e75f331abf97276112
