@@ -48,8 +48,9 @@ privacy-focused analysis.
 |------:|------------------------------|-----------------------|--------------------------------|
 | 1     | BitTorrent Evidence Appendix | Derived, Reproducible | Packet-level confirmation      |
 | 2     | HappyMod Evidence Bundle     | Immutable             | Original acquisition           |
-| 3     | Manifests & Verification     | Integrity Proof       | Hash and tree validation       |
-| 4     | Regulatory Correspondence    | Contextual            | Optional supporting material   |
+| 3     | APK Static Artifacts         | Derived               | Package, permissions, libraries |
+| 4     | Manifests & Verification     | Integrity Proof       | Hash and tree validation       |
+| 5     | Regulatory Correspondence    | Contextual            | Optional supporting material   |
 
 Most reviewers should begin with the BitTorrent Evidence Appendix. It provides
 a concise, packet-level confirmation of the activity visible in the PCAPdroid
@@ -207,6 +208,38 @@ Using these materials, a reviewer can independently:
 
 ---
 
+## APK Static Artifacts
+
+The `evidence/derived/apk_static` directory contains derived static-analysis
+artifacts for the HappyMod APKs referenced by `evidence/raw/apk`.
+
+Current APK static artifacts include:
+
+- `happymod_apk_static_metadata.jsonl`
+- `<sha12>_badging.txt` files produced from `aapt dump badging`
+- `libchecker_webui_happymod_20260910T070139Z.md`
+- `libchecker_webui_happymod_20260910T070139Z.json.sha256`
+
+The LibChecker WebUI artifact was generated with `https://lc.absinthe.life/`.
+Its exported analyzer profile is `browser-local-apk-analyzer`. It records static
+APK observations including package identity, permissions, native-library
+inventory, APK signatures, DEX feature markers, SDK-rule detections,
+BitTorrent/download-named components, and background-work components.
+
+Notable non-interpretive findings from that artifact include native
+`libjlibtorrent-1.2.15.2.so` entries under `arm64-v8a` and `armeabi-v7a`, a
+LibChecker SDK-rule detection for `jlibtorrent`, and APK components named
+`btdownload.gui.view.TorrentGetActivity`, `btdownload.services.EngineService`,
+`btdownload.services.statistics.WorkService`, and
+`btdownload.services.EngineBroadcastReceiver`.
+
+These APK static artifacts do not, by themselves, assert runtime behavior,
+malware classification, legal conclusions, user intent, or developer intent.
+Their purpose is to provide static APK context for the packet-level and
+PCAPdroid-derived evidence.
+
+---
+
 ## Evidence Handling Notes
 
 The BitTorrent Evidence Appendix is derived evidence intended for efficient,
@@ -250,6 +283,8 @@ Any qualified reviewer with access to this repository can:
 - Verify all cryptographic hashes  
 - Recreate the BitTorrent activity window from the original capture  
 - Regenerate all derived summaries  
+- Review derived APK static-analysis artifacts for package, permission,
+  component, library, and signing context  
 - Independently confirm correspondence between UI screenshots and packet data  
 
 For non-interpretive, packet-level verification, see
@@ -296,6 +331,11 @@ Network captures and CSV exports used in this repository were collected with
 [PCAPdroid](https://github.com/emanuele-f/PCAPdroid), an open-source Android
 traffic capture and analysis tool by Emanuele Faranda, licensed under
 GNU GPL version 3 or later.
+
+Static APK review artifacts include output generated with **LibChecker WebUI**
+(`https://lc.absinthe.life/`). The repository records those outputs as derived
+static-analysis artifacts and does not redistribute LibChecker WebUI source code
+or binaries.
 
 This repository does **not** redistribute PCAPdroid source code or binaries.
 It only archives PCAPdroid-generated capture artifacts (PCAP/PCAPNG and
